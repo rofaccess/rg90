@@ -2,6 +2,9 @@ require_relative "boot"
 
 require "rails/all"
 
+# Se importa simplecov aquí para prevenir un error lanzado por simplecov-material
+require "simplecov" if Rails.env.test?
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

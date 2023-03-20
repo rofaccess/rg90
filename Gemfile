@@ -73,4 +73,7 @@ group :test do
   # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage across test suites.
   # https://github.com/simplecov-ruby/simplecov
   gem "simplecov", require: false
+
+  # HTML Material Design View for Simplecov formatter. https://github.com/chiefpansancolt/simplecov-material
+  gem "simplecov-material"
 end

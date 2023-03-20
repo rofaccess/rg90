@@ -1,12 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 
 require_relative "../config/environment"
-
-# Obs.: Las siguientes 2 líneas no surten efecto si se ubican después de require "rails/test_help"
-require "simplecov"
-SimpleCov.start "rg90"
-
 require "rails/test_help"
+
+SimpleCov.formatter = SimpleCov::Formatter::MaterialFormatter
+SimpleCov.start "rg90"
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
