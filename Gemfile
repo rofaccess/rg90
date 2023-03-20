@@ -69,4 +69,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage across test suites.
+  # https://github.com/simplecov-ruby/simplecov
+  gem "simplecov", require: false
 end
