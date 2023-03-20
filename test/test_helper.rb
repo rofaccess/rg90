@@ -4,7 +4,7 @@ require_relative "../config/environment"
 
 # Obs.: Las siguientes 2 líneas no surten efecto si se ubican después de require "rails/test_help"
 require "simplecov"
-SimpleCov.start "rails"
+SimpleCov.start "rg90"
 
 require "rails/test_help"
 
