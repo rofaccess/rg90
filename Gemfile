@@ -76,4 +76,7 @@ group :test do
 
   # HTML Material Design View for Simplecov formatter. https://github.com/chiefpansancolt/simplecov-material
   gem "simplecov-material"
+
+  # Create customizable MiniTest output formats. https://github.com/minitest-reporters/minitest-reporters
+  gem "minitest-reporters"
 end
