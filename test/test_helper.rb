@@ -18,3 +18,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+# Según la documentación, debe estar al final o aunque sea despues de la línea require "rails/test_help"
+require "mocha/minitest"

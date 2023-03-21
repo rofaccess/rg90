@@ -85,4 +85,7 @@ group :test do
 
   # Make Rails Use MiniTest::Spec!. https://github.com/metaskills/minitest-spec-rails
   gem "minitest-spec-rails"
+
+  # Mocha is a mocking and stubbing library for Ruby. https://github.com/freerange/mocha
+  gem "mocha"
 end

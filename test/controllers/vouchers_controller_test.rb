@@ -12,7 +12,7 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
       assert_equal Voucher.all.size, assigns(:vouchers).size
     end
 
-    should "responds successfully with an HTTP 200 status code" do
+    should "responds with an HTTP 200 status code" do
       assert_response :success
     end
 
@@ -28,7 +28,7 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
       assert assigns(:voucher).new_record?
     end
 
-    should "responds successfully with an HTTP 200 status code" do
+    should "responds with an HTTP 200 status code" do
       assert_response :success
     end
 
@@ -38,22 +38,12 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
   end
 
   describe "POST create" do
-    before do
-      @vouchers_count = Voucher.count
-
-      voucher_params = {
-        business_identifier: @voucher.business_identifier,
-        business_name: @voucher.business_name,
-        date: @voucher.date,
-        number: @voucher.number,
-        timbrado: @voucher.timbrado,
-        total_amount: @voucher.total_amount
-      }
-
-      post vouchers_url, params: { voucher: voucher_params }
-    end
-
     context "with valid params" do
+      before do
+        @vouchers_count = Voucher.count
+        post vouchers_url, params: { voucher: voucher_params }
+      end
+
       should "create a new voucher" do
         assert_equal @vouchers_count + 1, Voucher.count
       end
@@ -62,7 +52,7 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
         assert assigns(:voucher)
       end
 
-      should "responds successfully with an HTTP 302 status code" do
+      should "responds with an HTTP 302 status code" do
         assert_response :found
       end
 
@@ -72,7 +62,26 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
 
     context "with invalid params" do
+      before do
+        voucher = Voucher.new
+        voucher.expects(:save).returns(false)
+        Voucher.expects(:new).returns(voucher)
 
+        @vouchers_count = Voucher.count
+        post vouchers_url, params: { voucher: voucher_params }
+      end
+
+      should "not create a new voucher" do
+        assert_equal @vouchers_count, Voucher.count
+      end
+
+      should "responds with an HTTP 422 status code" do
+        assert_response :unprocessable_entity
+      end
+
+      should "renders the new template" do
+        assert_template :new
+      end
     end
   end
 
@@ -97,5 +106,16 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to vouchers_url
+  end
+
+  def voucher_params
+    {
+      business_identifier: @voucher.business_identifier,
+      business_name: @voucher.business_name,
+      date: @voucher.date,
+      number: @voucher.number,
+      timbrado: @voucher.timbrado,
+      total_amount: @voucher.total_amount
+    }
   end
 end
