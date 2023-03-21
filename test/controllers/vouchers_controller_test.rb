@@ -113,9 +113,20 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should get edit" do
-    get edit_voucher_url(@voucher)
-    assert_response :success
+  describe "GET edit" do
+    before { get edit_voucher_url(@voucher) }
+
+    should "load the voucher into @voucher" do
+      assert_equal @voucher.id, assigns(:voucher).id
+    end
+
+    should "responds with an HTTP 200 status code" do
+      assert_response :success
+    end
+
+    should "renders the new template" do
+      assert_template :edit
+    end
   end
 
   test "should update voucher" do
