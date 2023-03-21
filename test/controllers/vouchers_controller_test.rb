@@ -85,9 +85,32 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should show voucher" do
-    get voucher_url(@voucher)
-    assert_response :success
+  describe "GET show" do
+    context "with existing voucher" do
+      before do
+        get voucher_url(@voucher)
+      end
+
+      should "load the voucher into @voucher" do
+        assert assigns(:voucher)
+      end
+
+      should "responds with an HTTP 200 status code" do
+        assert_response :success
+      end
+
+      should "renders the show template" do
+        assert_template :show
+      end
+    end
+
+    context "when no exist voucher" do
+      should "raise ActiveRecord::RecordNotFound" do
+        assert_raise ActiveRecord::RecordNotFound do
+          get voucher_url(12345)
+        end
+      end
+    end
   end
 
   test "should get edit" do
