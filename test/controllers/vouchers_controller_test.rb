@@ -21,9 +21,20 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should get new" do
-    get new_voucher_url
-    assert_response :success
+  describe "GET new" do
+    before { get new_voucher_url }
+
+    should "responds successfully with an HTTP 200 status code" do
+      assert_response :success
+    end
+
+    should "renders the new template" do
+      assert_template :new
+    end
+
+    should "load a new user into @voucher" do
+      assert assigns(:voucher).new_record?
+    end
   end
 
   test "should create voucher" do
