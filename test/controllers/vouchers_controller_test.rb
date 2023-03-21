@@ -129,9 +129,52 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should update voucher" do
-    patch voucher_url(@voucher), params: { voucher: { business_identifier: @voucher.business_identifier, business_name: @voucher.business_name, date: @voucher.date, number: @voucher.number, timbrado: @voucher.timbrado, total_amount: @voucher.total_amount } }
-    assert_redirected_to voucher_url(@voucher)
+  describe "PATCH update" do
+    context "with valid params" do
+      before do
+        @update_voucher_params = update_voucher_params
+        patch voucher_url(@voucher), params: { voucher: @update_voucher_params }
+      end
+
+      should "update voucher" do
+        assert_equal @update_voucher_params[:business_name], assigns(:voucher).business_name
+      end
+
+      should "load the voucher into @voucher" do
+        assert assigns(:voucher)
+      end
+
+      should "responds with an HTTP 302 status code" do
+        assert_response :found
+      end
+
+      should "redirects to the updated voucher" do
+        assert_redirected_to voucher_url(@voucher)
+      end
+    end
+
+    context "with invalid params" do
+      before do
+        voucher = Voucher.new
+        voucher.expects(:update).returns(false)
+        Voucher.expects(:find).returns(voucher)
+
+        @update_voucher_params = update_voucher_params
+        patch voucher_url(@voucher), params: { voucher: @update_voucher_params }
+      end
+
+      should "not update voucher" do
+        assert_not_equal @update_voucher_params[:business_name], assigns(:voucher).business_name
+      end
+
+      should "responds with an HTTP 422 status code" do
+        assert_response :unprocessable_entity
+      end
+
+      should "renders the new template" do
+        assert_template :edit
+      end
+    end
   end
 
   test "should destroy voucher" do
@@ -151,5 +194,11 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
       timbrado: @voucher.timbrado,
       total_amount: @voucher.total_amount
     }
+  end
+
+  def update_voucher_params
+    update_voucher_params = voucher_params
+    update_voucher_params[:business_name] = "New business name"
+    update_voucher_params
   end
 end
