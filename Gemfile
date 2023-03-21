@@ -79,4 +79,10 @@ group :test do
 
   # Create customizable MiniTest output formats. https://github.com/minitest-reporters/minitest-reporters
   gem "minitest-reporters"
+
+  # Se agrega esta gema para poder utilizar assert_template en las pruebas de controlador
+  gem "rails-controller-testing"
+
+  # Make Rails Use MiniTest::Spec!. https://github.com/metaskills/minitest-spec-rails
+  gem "minitest-spec-rails"
 end

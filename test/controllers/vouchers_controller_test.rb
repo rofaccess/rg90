@@ -5,9 +5,20 @@ class VouchersControllerTest < ActionDispatch::IntegrationTest
     @voucher = vouchers(:one)
   end
 
-  test "should get index" do
-    get vouchers_url
-    assert_response :success
+  describe "GET index" do
+    before { get vouchers_url }
+
+    should "responds successfully with an HTTP 200 status code" do
+      assert_response :success
+    end
+
+    should "renders the index template" do
+      assert_template :index
+    end
+
+    should "load all vouchers into @vouchers" do
+      assert_equal Voucher.all.size, assigns(:vouchers).size
+    end
   end
 
   test "should get new" do
