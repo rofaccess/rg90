@@ -103,3 +103,5 @@ group :test do
   # https://github.com/presidentbeef/brakeman
   gem "brakeman"
 end
+
+gem "tailwindcss-rails", "~> 2.0"
