@@ -91,5 +91,15 @@ group :test do
 
   # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   # https://github.com/rubocop/rubocop-rails
-  gem 'rubocop-rails', require: false
+  gem "rubocop-rails", require: false
+
+  # A code metric tool for rails projects. https://github.com/flyerhzm/rails_best_practices
+  gem "rails_best_practices"
+
+  # A Ruby code quality reporter .https://github.com/whitesmith/rubycritic
+  gem "rubycritic", require: false
+
+  # A static analysis security vulnerability scanner for Ruby on Rails applications.
+  # https://github.com/presidentbeef/brakeman
+  gem "brakeman"
 end
