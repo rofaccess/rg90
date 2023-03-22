@@ -88,4 +88,8 @@ group :test do
 
   # Mocha is a mocking and stubbing library for Ruby. https://github.com/freerange/mocha
   gem "mocha"
+
+  # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
+  # https://github.com/rubocop/rubocop-rails
+  gem 'rubocop-rails', require: false
 end

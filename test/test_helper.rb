@@ -1,5 +1,5 @@
 require "minitest/reporters"
-Minitest::Reporters.use! unless ENV['RM_INFO']
+Minitest::Reporters.use! unless ENV["RM_INFO"]
 
 ENV["RAILS_ENV"] ||= "test"
 
